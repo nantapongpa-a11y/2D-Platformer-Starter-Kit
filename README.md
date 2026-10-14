@@ -7,7 +7,8 @@
 
 ## Play / Demo
 
-- [Play Game (GitHub Pages)](https://nantapongpa-a11y.github.io/2D-Platformer-Starter-Kit/)
+- [Play Game (GitHub Pages)](https://nantapongpa-a11y.github.io/GameLab4/)
+- [GitHub Project](https://github.com/nantapongpa-a11y/GameLab4)
 - [Clip Demo VDO](https://youtu.be/xxxx) <!-- TODO: ใส่ลิงก์คลิปเล่นเกม ~2 นาที -->
 
 <img src="docs/demo1.jpg" width="300"> <img src="docs/demo4.jpg" width="300">
