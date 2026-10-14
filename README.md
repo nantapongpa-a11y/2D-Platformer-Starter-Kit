@@ -9,7 +9,7 @@
 
 - [Play Game (GitHub Pages)](https://nantapongpa-a11y.github.io/GameLab4/)
 - [GitHub Project](https://github.com/nantapongpa-a11y/GameLab4)
-- [Clip Demo VDO](https://youtu.be/xxxx) <!-- TODO: ใส่ลิงก์คลิปเล่นเกม ~2 นาที -->
+- [Clip Demo VDO](https://drive.google.com/file/d/1kwTK-wiChs75mxo5pUMNzg_CAIeMlEyC/view?usp=sharing)
 
 <img src="docs/demo1.jpg" width="300"> <img src="docs/demo4.jpg" width="300">
 <img src="docs/demo2.jpg" width="300"> <img src="docs/demo3.jpg" width="300">
