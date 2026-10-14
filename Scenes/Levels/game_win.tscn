@@ -1,58 +1,125 @@
 [gd_scene format=3 uid="uid://b46lxwc5r3dy4"]
 
-[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="1_5l1gm"]
-[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="2_81byk"]
-[ext_resource type="PackedScene" uid="uid://bvoon20abmdym" path="res://Scenes/Sprites/student.tscn" id="10_hero"]
-[ext_resource type="AudioStream" uid="uid://cbquowt7cd3d6" path="res://Assets/Sound/FX/level_complete.wav" id="11_snd"]
+[ext_resource type="Script" path="res://Scenes/Levels/game_end.gd" id="1_end"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/sea_backdrop.tscn" id="2_bd"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="4_theme"]
+[ext_resource type="PackedScene" uid="uid://bvoon20abmdym" path="res://Scenes/Sprites/student.tscn" id="5_hero"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/pier.png" id="6_pier"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/treasure_chest.png" id="7_chest"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/treasure_pile.png" id="8_pile"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_level_complete.wav" id="9_snd"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/captain_go_theme.ogg" id="10_music"]
+[ext_resource type="Texture2D" uid="uid://621as0fwjhum" path="res://Assets/Textures/star_07.png" id="11_star"]
 
-[node name="GameOver" type="Node2D" unique_id=826370530]
+[sub_resource type="Gradient" id="Gradient_confetti"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 0.3, 0.3, 1, 1, 0.85, 0.2, 1, 0.3, 0.9, 0.4, 1, 0.3, 0.6, 1, 1, 0.9, 0.4, 1, 1)
 
-[node name="Title" type="Label" parent="." unique_id=1965507633]
-offset_left = 438.0
-offset_top = 225.0
-offset_right = 742.0
-offset_bottom = 269.0
-theme = ExtResource("1_5l1gm")
-theme_override_colors/font_color = Color(0.36862746, 0.9137255, 0.1882353, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 33
-text = "You Win"
+[node name="GameWin" type="Node2D"]
+script = ExtResource("1_end")
+
+[node name="SeaBackdrop" parent="." instance=ExtResource("2_bd")]
+show_ship = false
+
+[node name="Pier" type="Sprite2D" parent="."]
+position = Vector2(230, 560)
+texture = ExtResource("6_pier")
+
+[node name="Pile" type="Sprite2D" parent="."]
+position = Vector2(330, 470)
+texture = ExtResource("8_pile")
+
+[node name="Chest" type="Sprite2D" parent="."]
+position = Vector2(330, 450)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("7_chest")
+
+[node name="Captain" parent="." instance=ExtResource("5_hero")]
+position = Vector2(150, 500)
+scale = Vector2(1.5, 1.5)
+
+[node name="Confetti" type="CPUParticles2D" parent="."]
+position = Vector2(600, -20)
+amount = 80
+lifetime = 4.0
+texture = ExtResource("11_star")
+emission_shape = 3
+emission_rect_extents = Vector2(620, 10)
+direction = Vector2(0, 1)
+spread = 30.0
+gravity = Vector2(0, 60)
+initial_velocity_min = 40.0
+initial_velocity_max = 120.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+scale_amount_min = 0.06
+scale_amount_max = 0.14
+color_initial_ramp = SubResource("Gradient_confetti")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 300.0
+offset_top = 50.0
+offset_right = 900.0
+offset_bottom = 150.0
+theme = ExtResource("4_theme")
+theme_override_colors/font_color = Color(1, 0.87, 0.32, 1)
+theme_override_colors/font_outline_color = Color(0.3, 0.08, 0.04, 1)
+theme_override_constants/outline_size = 18
+theme_override_font_sizes/font_size = 76
+text = "ชนะแล้ว!"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="btnExit" parent="." unique_id=1633606001 instance=ExtResource("2_81byk")]
-offset_left = 438.0
-offset_top = 359.0
-offset_right = 564.0
-offset_bottom = 413.0
-text = "Exit to Menu"
-
-[node name="btnPlay" parent="." unique_id=1146872882 instance=ExtResource("2_81byk")]
-offset_left = 597.0
-offset_top = 359.0
-offset_right = 723.0
-offset_bottom = 413.0
-shortcut = null
-text = "Play Again"
 
 [node name="StoryLine" type="Label" parent="."]
-offset_left = 290.0
-offset_top = 280.0
-offset_right = 890.0
-offset_bottom = 340.0
-theme = ExtResource("1_5l1gm")
-theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
-theme_override_font_sizes/font_size = 20
-text = "นันตะนำขนนกวายุกลับคืนหมู่บ้านลมหอมได้สำเร็จ! กังหันลมกลับมาหมุนอีกครั้ง"
+offset_left = 150.0
+offset_top = 160.0
+offset_right = 1050.0
+offset_bottom = 250.0
+theme = ExtResource("4_theme")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "กัปตันโก้ปราบกัปตันฉลามดำได้สำเร็จ และนำไข่มุกแห่งท้องทะเลกลับคืนสู่หมู่เกาะมุก
+ทะเลกลับมาสงบสุขอีกครั้ง!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Hero" parent="." instance=ExtResource("10_hero")]
-position = Vector2(250, 420)
-scale = Vector2(1.3, 1.3)
+[node name="Score" type="Label" parent="."]
+offset_left = 400.0
+offset_top = 255.0
+offset_right = 800.0
+offset_bottom = 295.0
+theme = ExtResource("4_theme")
+theme_override_colors/font_color = Color(1, 0.87, 0.32, 1)
+theme_override_font_sizes/font_size = 28
+text = "คะแนนรวม: 0"
+horizontal_alignment = 1
 
-[node name="Sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_snd")
+[node name="btnPlay" type="Button" parent="."]
+offset_left = 640.0
+offset_top = 320.0
+offset_right = 830.0
+offset_bottom = 380.0
+theme = ExtResource("4_theme")
+text = "เล่นอีกครั้ง"
+
+[node name="btnMenu" type="Button" parent="."]
+offset_left = 850.0
+offset_top = 320.0
+offset_right = 1040.0
+offset_bottom = 380.0
+theme = ExtResource("4_theme")
+text = "เมนูหลัก"
+
+[node name="Fanfare" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_snd")
 autoplay = true
 bus = &"sfx"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_music")
+autoplay = true
+volume_db = -6.0
+bus = &"music"
+
+[connection signal="pressed" from="btnPlay" to="." method="_on_btn_play_pressed"]
+[connection signal="pressed" from="btnMenu" to="." method="_on_btn_menu_pressed"]

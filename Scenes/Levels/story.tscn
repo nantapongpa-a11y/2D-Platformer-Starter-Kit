@@ -1,57 +1,90 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://Scenes/Levels/story.gd" id="1_story"]
-[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_story"]
-[ext_resource type="PackedScene" uid="uid://bvoon20abmdym" path="res://Scenes/Sprites/student.tscn" id="3_story"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/sea_backdrop.tscn" id="2_bd"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="3_theme"]
+[ext_resource type="PackedScene" uid="uid://bvoon20abmdym" path="res://Scenes/Sprites/student.tscn" id="4_hero"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/pier.png" id="5_pier"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/parchment.png" id="6_paper"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/boss_black_shark.png" id="7_boss"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/captain_go_theme.ogg" id="8_music"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boss"]
+atlas = ExtResource("7_boss")
+region = Rect2(0, 0, 128, 144)
 
 [node name="Story" type="Node2D"]
 script = ExtResource("1_story")
 
-[node name="BG" type="ColorRect" parent="."]
-offset_right = 1200.0
-offset_bottom = 650.0
-color = Color(0.09, 0.12, 0.25, 1)
+[node name="SeaBackdrop" parent="." instance=ExtResource("2_bd")]
+show_ship = false
+
+[node name="Pier" type="Sprite2D" parent="."]
+position = Vector2(150, 560)
+texture = ExtResource("5_pier")
+
+[node name="Captain" parent="." instance=ExtResource("4_hero")]
+position = Vector2(150, 500)
+scale = Vector2(1.5, 1.5)
+
+[node name="Boss" type="Sprite2D" parent="."]
+position = Vector2(1110, 470)
+texture = SubResource("AtlasTexture_boss")
 
 [node name="Title" type="Label" parent="."]
-offset_left = 300.0
-offset_top = 30.0
-offset_right = 1150.0
-offset_bottom = 100.0
-theme = ExtResource("2_story")
-theme_override_colors/font_color = Color(0.55, 0.9, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 40
-text = "นันตะ กับ ขนนกวายุ"
+offset_left = 330.0
+offset_top = 18.0
+offset_right = 1050.0
+offset_bottom = 88.0
+theme = ExtResource("3_theme")
+theme_override_colors/font_color = Color(1, 0.87, 0.32, 1)
+theme_override_colors/font_outline_color = Color(0.3, 0.08, 0.04, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 44
+text = "ตำนานไข่มุกแห่งท้องทะเล"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="StoryText" type="Label" parent="."]
-offset_left = 300.0
-offset_top = 110.0
-offset_right = 1150.0
-offset_bottom = 520.0
-theme = ExtResource("2_story")
-theme_override_font_sizes/font_size = 22
-text = "หมู่บ้านลมหอมมี \"ขนนกวายุ\" คอยพัดกังหันลมให้ทุกคนมีน้ำมีข้าวกิน
-แต่คืนหนึ่ง จอมเวทเห็ดพิษ ได้ขโมยขนนกไปจนหมด
-แล้วปล่อยกองทัพเห็ดและสไลม์ออกมาเต็มป่า
+[node name="Parchment" type="Sprite2D" parent="."]
+position = Vector2(690, 300)
+scale = Vector2(0.86, 0.86)
+texture = ExtResource("6_paper")
 
-\"นันตะ\" เด็กฝึกเวทในชุดคลุมสีน้ำเงิน ถือคทาไฟคู่ใจ
-ออกเดินทางผ่านป่า หุบเขา และหอคอย เพื่อนำขนนกกลับมา
+[node name="StoryText" type="Label" parent="Parchment"]
+offset_left = -390.0
+offset_top = -200.0
+offset_right = 390.0
+offset_bottom = 205.0
+theme = ExtResource("3_theme")
+theme_override_colors/font_color = Color(0.29, 0.16, 0.06, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 2
+theme_override_font_sizes/font_size = 21
+text = "ณ หมู่เกาะมุกกลางทะเลคราม มี \"ไข่มุกแห่งท้องทะเล\"
+คอยปกป้องทุกเกาะจากพายุร้าย
+คืนหนึ่ง \"กัปตันฉลามดำ\" จอมโจรสลัดผู้โหดเหี้ยม
+บุกขโมยไข่มุกไปซ่อนไว้ในถ้ำสมบัติ
+แล้วปล่อยโจรสลัด ปู และโครงกระดูก ออกอาละวาดทั่วทะเล
 
-- เก็บเหรียญ และ ขนนกวายุ (วิ่งเร็ว + กระโดดสูง 8 วินาที)
-- ยิงบอลไฟ (X) หรือกระโดดหลบ เห็ดและสไลม์
-- ระวังกับดัก แล้วเข้าประตูเพื่อไปด่านต่อไป"
+\"กัปตันโก้\" นักเดินเรือผู้กล้าหาญ คว้าดาบคลื่นทะเลคู่ใจ
+ออกเดินทางผ่าน 4 ด่าน เพื่อนำไข่มุกกลับคืนสู่หมู่เกาะ!
+หาดเกาะมุก → ท่าเรือโจรสลัด → เรือโจรสลัด → ถ้ำสมบัติ
 
-[node name="Hero" parent="." instance=ExtResource("3_story")]
-position = Vector2(150, 470)
-scale = Vector2(1.6, 1.6)
+A / D เดิน   •   Space กระโดด 2 ชั้น   •   X ฟันคลื่นน้ำ"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="btnGo" type="Button" parent="."]
-offset_left = 640.0
-offset_top = 540.0
-offset_right = 880.0
-offset_bottom = 604.0
-theme = ExtResource("2_story")
-text = "เริ่มผจญภัย"
+offset_left = 590.0
+offset_top = 545.0
+offset_right = 790.0
+offset_bottom = 605.0
+theme = ExtResource("3_theme")
+text = "ออกเรือ!"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_music")
+bus = &"music"
 
 [connection signal="pressed" from="btnGo" to="." method="_on_btn_go_pressed"]

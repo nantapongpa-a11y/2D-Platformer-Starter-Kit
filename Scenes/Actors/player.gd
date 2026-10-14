@@ -1,8 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
-signal hit_enemy
-signal hit_trap 
+signal hit_enemy(amount: int)
+signal hit_trap
+signal fell_in_sea
 
 
 # --------- VARIABLES ---------- #
@@ -20,7 +21,7 @@ var jump_count : int = 2
 var flip_x = false
 
 @export_category("Toggle Functions") # Double jump feature is disable by default (Can be toggled from inspector)
-@export var double_jump : = false
+@export var double_jump : = true
 
 var is_grounded : bool = false
 var movement_enabled : bool = true
@@ -28,8 +29,9 @@ var spawn_point = Vector2(0,0)
 var is_attacking = false
 var shoot_cooldown_timer = 0.0
 var can_damage = true
+var is_dead = false
 
-# Wind Feather power-up (run faster + jump higher for a short time)
+# Wind Conch power-up (run faster + jump higher for a short time)
 var base_move_speed : float
 var base_jump_force : float
 var boost_time : float = 0.0
@@ -93,8 +95,8 @@ func movement():
 		if Input.is_action_pressed("Right"):
 			velocity.x = move_speed
 			flip_x = false
-	if velocity.y > 5000:
-		hit_trap.emit()
+	if velocity.y > 5000 and !is_dead:
+		fell_in_sea.emit()
 	move_and_slide()
 
 # Handles jumping functionality (double jump or single jump, can be toggled from inspector)
@@ -112,7 +114,7 @@ func jump():
 	AudioManager.jump_sfx.play()
 	velocity.y = -jump_force
 
-# Called by the Wind Feather item
+# Called by the Wind Conch item
 func wind_boost(duration : float = 8.0):
 	boost_time = duration
 	move_speed = base_move_speed * 1.4
@@ -143,6 +145,7 @@ func flip_player():
 
 # Tween Animations
 func death_tween():
+	is_dead = true
 	AudioManager.death_sfx.play()
 	death_particles.emitting = true
 	movement_enabled = false
@@ -151,8 +154,10 @@ func death_tween():
 	tween.parallel().tween_property(self, "position", Vector2(position.x,position.y-100), 0.15)
 	await tween.finished
 	global_position = spawn_point
+	velocity = Vector2.ZERO
 	await get_tree().create_timer(0.3).timeout
 	movement_enabled = true
+	is_dead = false
 	AudioManager.respawn_sfx.play()
 	respawn_tween()
 
@@ -178,30 +183,43 @@ func damage_tween():
 	can_damage = true
 
 func _handle_enemy_contact() -> void:
-	if !can_damage:
-		return
 	var bodies = $Collision.get_overlapping_bodies()
 	for body in bodies:
 		if body != null:
 			_on_collision_body_entered(body)
-			
-func _apply_enemy_damage(body) -> void:
-	var dx = body.position.x - position.x
+
+# Push the player away from whatever hurt him and flash red for a moment
+func _knockback_from(body) -> void:
+	var dx = body.global_position.x - global_position.x
 	velocity.y = -400
 	if dx > 0:
 		velocity.x = -300
 	else:
 		velocity.x = 300
 	damage_tween()
-	hit_enemy.emit()
+
 # --------- SIGNALS ---------- #
 
-# Reset the player's position to the current level spawn point if collided with any trap
+# Sea = lose a life and respawn at the last checkpoint.
+# Traps, pirates and cannonballs = lose HP (not instant death).
 func _on_collision_body_entered(body):
+	if is_dead:
+		return
+	if body.is_in_group("Sea"):
+		fell_in_sea.emit()
+		return
+	if !can_damage:
+		return
 	if body.is_in_group("Traps"):
+		_knockback_from(body)
 		hit_trap.emit()
-	if body.is_in_group("Enemy") and can_damage:
-		_apply_enemy_damage(body)
+	elif body.is_in_group("Enemy"):
+		_knockback_from(body)
+		hit_enemy.emit(body.atk if "atk" in body else 5)
+	elif body.is_in_group("Bullet_Enemy"):
+		_knockback_from(body)
+		hit_enemy.emit(10)
+		body.queue_free()
 
 func handle_shooting():
 	if Input.is_action_just_pressed("Shoot") and movement_enabled and shoot_cooldown_timer <= 0:
@@ -211,6 +229,7 @@ func shoot():
 	if bullet_scene == null:
 		return
 	is_attacking = true
+	AudioManager.shoot_sfx.play()
 	player_sprite.play("Attack")
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = bullet_marker.global_position

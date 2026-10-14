@@ -1,0 +1,98 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://d27bcsmx82vfa" path="res://Scenes/Actors/enemy.tscn" id="1_base"]
+[ext_resource type="Script" path="res://Scenes/Actors/pirate_enemy.gd" id="2_script"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/pirate_grunt.png" id="3_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0"]
+atlas = ExtResource("3_tex")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1"]
+atlas = ExtResource("3_tex")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2"]
+atlas = ExtResource("3_tex")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3"]
+atlas = ExtResource("3_tex")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4"]
+atlas = ExtResource("3_tex")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5"]
+atlas = ExtResource("3_tex")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_walk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 18.0
+height = 70.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hit"]
+radius = 22.0
+height = 80.0
+
+[node name="Enemy" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+speed = 70.0
+hp = 30
+hp_max = 30
+atk = 10
+state = 2
+type = 2
+patrol_wait_time = 2.5
+chase_range = 220.0
+label = "โจรสลัด"
+
+[node name="CollisionShape2D" parent="."]
+position = Vector2(0, -35.0)
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="CollisionShape2D2" parent="HitArea"]
+position = Vector2(0, -40.0)
+shape = SubResource("CapsuleShape2D_hit")
+
+[node name="AnimateSprite" type="AnimatedSprite2D" parent="Sprite"]
+position = Vector2(0, -42)
+scale = Vector2(1.0, 1.0)
+sprite_frames = SubResource("SpriteFrames_walk")
+animation = &"walk"
+
+[node name="ProgressBar" parent="."]
+offset_top = -120.0
+offset_bottom = -106.0
+
+[node name="Label" parent="."]
+offset_top = -108.0
+offset_bottom = -80.0
+theme_override_font_sizes/font_size = 13

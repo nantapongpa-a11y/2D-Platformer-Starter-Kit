@@ -1,0 +1,96 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/Levels/sea_backdrop.gd" id="1_bd"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/sky_day.png" id="2_sky"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/far_sea.png" id="3_far"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/waves.png" id="4_waves"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/hero_ship.png" id="5_ship"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/seagull.png" id="6_gull"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0"]
+atlas = ExtResource("6_gull")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1"]
+atlas = ExtResource("6_gull")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gull"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 4.0
+}]
+
+[node name="SeaBackdrop" type="Node2D"]
+script = ExtResource("1_bd")
+
+[node name="Sky" type="TextureRect" parent="."]
+offset_left = -80.0
+offset_top = -40.0
+offset_right = 1480.0
+offset_bottom = 740.0
+texture = ExtResource("2_sky")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Gulls" type="Node2D" parent="."]
+
+[node name="Gull1" type="AnimatedSprite2D" parent="Gulls"]
+position = Vector2(300, 190)
+sprite_frames = SubResource("SpriteFrames_gull")
+animation = &"fly"
+
+[node name="Gull2" type="AnimatedSprite2D" parent="Gulls"]
+position = Vector2(760, 250)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_gull")
+animation = &"fly"
+
+[node name="Gull3" type="AnimatedSprite2D" parent="Gulls"]
+position = Vector2(1100, 160)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_gull")
+animation = &"fly"
+
+[node name="Far" type="Node2D" parent="."]
+
+[node name="A" type="Sprite2D" parent="Far"]
+texture = ExtResource("3_far")
+centered = false
+
+[node name="B" type="Sprite2D" parent="Far"]
+position = Vector2(1152, 0)
+texture = ExtResource("3_far")
+centered = false
+
+[node name="Ship" type="Sprite2D" parent="."]
+position = Vector2(640, 380)
+scale = Vector2(0.62, 0.62)
+texture = ExtResource("5_ship")
+
+[node name="Waves" type="Node2D" parent="."]
+position = Vector2(0, 476)
+
+[node name="A" type="Sprite2D" parent="Waves"]
+texture = ExtResource("4_waves")
+centered = false
+
+[node name="B" type="Sprite2D" parent="Waves"]
+position = Vector2(1152, 0)
+texture = ExtResource("4_waves")
+centered = false
+
+[node name="Deep" type="ColorRect" parent="."]
+offset_left = -80.0
+offset_top = 634.0
+offset_right = 1480.0
+offset_bottom = 900.0
+color = Color(0.078, 0.314, 0.627, 1)

@@ -8,3 +8,7 @@ extends Node
 @onready var respawn_sfx = $RespawnSfx
 @onready var level_complete_sfx = $LevelCompleteSfx
 @onready var powerup_sfx = $PowerUpSfx
+@onready var shoot_sfx = $ShootSfx
+@onready var splash_sfx = $SplashSfx
+@onready var checkpoint_sfx = $CheckpointSfx
+@onready var cannon_sfx = $CannonSfx

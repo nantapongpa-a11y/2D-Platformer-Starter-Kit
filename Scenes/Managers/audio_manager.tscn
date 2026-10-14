@@ -1,38 +1,66 @@
 [gd_scene format=3 uid="uid://bssjjygu83iwl"]
 
 [ext_resource type="Script" uid="uid://da11xjja1ocm7" path="res://Scenes/Managers/audio_manager.gd" id="1_hp1cr"]
-[ext_resource type="AudioStream" uid="uid://cyjn00m1ehkp1" path="res://Assets/Sound/FX/jump.wav" id="2_esrla"]
-[ext_resource type="AudioStream" uid="uid://d2yw2hs5pd8cm" path="res://Assets/Sound/FX/coin_pickup.wav" id="3_qes3j"]
-[ext_resource type="AudioStream" uid="uid://b5gyns7mtiq0d" path="res://Assets/Sound/FX/hurt.wav" id="4_84782"]
-[ext_resource type="AudioStream" uid="uid://cbquowt7cd3d6" path="res://Assets/Sound/FX/level_complete.wav" id="5_84782"]
-[ext_resource type="AudioStream" path="res://Assets/Sound/FX/powerup.wav" id="6_pwrup"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_jump.wav" id="s0"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_coin.wav" id="s1"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_hurt.wav" id="s2"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_checkpoint.wav" id="s3"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_level_complete.wav" id="s4"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_powerup.wav" id="s5"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_shoot.wav" id="s6"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_splash.wav" id="s7"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_checkpoint.wav" id="s8"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_cannon.wav" id="s9"]
 
-[node name="AudioManager" type="Node" unique_id=1179160635]
+[node name="AudioManager" type="Node"]
 script = ExtResource("1_hp1cr")
 
-[node name="JumpSfx" type="AudioStreamPlayer" parent="." unique_id=2131118805]
-stream = ExtResource("2_esrla")
+[node name="JumpSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("s0")
 volume_db = -3.0
 bus = &"sfx"
 
-[node name="CoinPickup" type="AudioStreamPlayer" parent="." unique_id=1602662747]
-stream = ExtResource("3_qes3j")
+[node name="CoinPickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("s1")
+volume_db = -2.0
 bus = &"sfx"
 
-[node name="DeathSfx" type="AudioStreamPlayer" parent="." unique_id=1498187337]
-stream = ExtResource("4_84782")
+[node name="DeathSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("s2")
 volume_db = -3.0
 bus = &"sfx"
 
-[node name="RespawnSfx" type="AudioStreamPlayer" parent="." unique_id=179996886]
+[node name="RespawnSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("s3")
+volume_db = -8.0
 bus = &"sfx"
 
-[node name="LevelCompleteSfx" type="AudioStreamPlayer" parent="." unique_id=1672470775]
-stream = ExtResource("5_84782")
-volume_db = -4.0
+[node name="LevelCompleteSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("s4")
+volume_db = -3.0
 bus = &"sfx"
 
 [node name="PowerUpSfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_pwrup")
+stream = ExtResource("s5")
+volume_db = -4.0
+bus = &"sfx"
+
+[node name="ShootSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("s6")
+volume_db = -8.0
+bus = &"sfx"
+
+[node name="SplashSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("s7")
+volume_db = -2.0
+bus = &"sfx"
+
+[node name="CheckpointSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("s8")
+volume_db = -3.0
+bus = &"sfx"
+
+[node name="CannonSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("s9")
 volume_db = -4.0
 bus = &"sfx"

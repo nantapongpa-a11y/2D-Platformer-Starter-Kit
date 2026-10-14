@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bvoon20abmdym"]
 
-[ext_resource type="Texture2D" path="res://Assets/Spritesheet/hero_nanta.png" id="1_jda5o"]
-[ext_resource type="Texture2D" uid="uid://b7f4d7rpedxw3" path="res://Assets/Spritesheet/WandT2.png" id="2_w1wrk"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/captain_go.png" id="1_jda5o"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/cutlass.png" id="2_w1wrk"]
 
 [sub_resource type="Animation" id="Animation_xb0ar"]
 resource_name = "Attack"
@@ -880,10 +880,9 @@ _data = {
 position = Vector2(44, -72)
 texture = ExtResource("2_w1wrk")
 skeleton = NodePath("../../Skeleton2D")
-polygon = PackedVector2Array(19, -25, 19, -23.5, 14.700001, -22, 8, -22, 0.79999924, -11.9, -1.5, -13, -7.3999996, -13, -9.4, -8, -11.700001, -8, -9, 1, -20.9, 12, -24.1, 12, -18.3, 25, -9, 25, 5, 7.700001, 18.5, 0, 21.400002, 0, 27.400002, -17, 28.2, -17, 29.3, -19.1, 27, -22.7, 27, -25)
-uv = PackedVector2Array(51, 7, 51, 8.5, 46.7, 10, 40, 10, 32.8, 20.1, 30.5, 19, 24.6, 19, 22.6, 24, 20.3, 24, 23, 33, 11.1, 44, 7.9, 44, 13.7, 57, 23, 57, 37, 39.7, 50.5, 32, 53.4, 32, 59.4, 15, 60.2, 15, 61.3, 12.9, 59, 9.3, 59, 7)
-polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)]
-bones = ["body", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "body/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "body/head/head2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "body/LArm", PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5), "body/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "body/RLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "body/RLeg/RLeg2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "body/LLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "body/LLeg/LLeg2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
+bones = ["body", PackedFloat32Array(0, 0, 0, 0), "body/head", PackedFloat32Array(0, 0, 0, 0), "body/head/head2", PackedFloat32Array(0, 0, 0, 0), "body/LArm", PackedFloat32Array(1, 1, 1, 1), "body/RArm", PackedFloat32Array(0, 0, 0, 0), "body/RLeg", PackedFloat32Array(0, 0, 0, 0), "body/RLeg/RLeg2", PackedFloat32Array(0, 0, 0, 0), "body/LLeg", PackedFloat32Array(0, 0, 0, 0), "body/LLeg/LLeg2", PackedFloat32Array(0, 0, 0, 0)]
 
 [node name="LArm" type="Polygon2D" parent="part" unique_id=1197527185]
 position = Vector2(-98.7251, -148.98305)

@@ -1,59 +1,98 @@
 [gd_scene format=3 uid="uid://c15tw24t3axhb"]
 
-[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="2_buq0o"]
-[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_chlux"]
-[ext_resource type="PackedScene" uid="uid://bvoon20abmdym" path="res://Scenes/Sprites/student.tscn" id="10_hero"]
-[ext_resource type="AudioStream" uid="uid://b5gyns7mtiq0d" path="res://Assets/Sound/FX/hurt.wav" id="11_snd"]
+[ext_resource type="Script" path="res://Scenes/Levels/game_end.gd" id="1_end"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/sea_backdrop.tscn" id="2_bd"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/sky_sunset.png" id="3_sky"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="4_theme"]
+[ext_resource type="PackedScene" uid="uid://bvoon20abmdym" path="res://Scenes/Sprites/student.tscn" id="5_hero"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/pier.png" id="6_pier"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/boss_black_shark.png" id="7_boss"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/sea_splash.wav" id="8_snd"]
 
-[node name="GameOver" type="Node2D" unique_id=826370530]
+[sub_resource type="AtlasTexture" id="AtlasTexture_boss"]
+atlas = ExtResource("7_boss")
+region = Rect2(0, 0, 128, 144)
 
-[node name="Title" type="Label" parent="." unique_id=1965507633]
-offset_left = 419.0
-offset_top = 227.0
-offset_right = 720.0
-offset_bottom = 259.0
-theme = ExtResource("2_chlux")
-theme_override_colors/font_color = Color(0.88235295, 0.18039216, 0.1882353, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 24
-text = "Game Over"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_end")
 
-[node name="btnExit" parent="." unique_id=1633606001 instance=ExtResource("2_buq0o")]
-offset_left = 438.0
-offset_top = 359.0
-offset_right = 564.0
-offset_bottom = 413.0
-text = "Exit to Menu"
+[node name="SeaBackdrop" parent="." instance=ExtResource("2_bd")]
+sky = ExtResource("3_sky")
+show_ship = false
+tint = Color(0.75, 0.65, 0.8, 1)
 
-[node name="btnPlay" parent="." unique_id=1146872882 instance=ExtResource("2_buq0o")]
-offset_left = 597.0
-offset_top = 359.0
-offset_right = 723.0
-offset_bottom = 413.0
-shortcut = null
-text = "Play Again"
+[node name="Pier" type="Sprite2D" parent="."]
+position = Vector2(230, 560)
+texture = ExtResource("6_pier")
 
-[node name="StoryLine" type="Label" parent="."]
-offset_left = 290.0
-offset_top = 280.0
-offset_right = 890.0
-offset_bottom = 340.0
-theme = ExtResource("2_chlux")
-theme_override_colors/font_color = Color(1, 0.6, 0.6, 1)
-theme_override_font_sizes/font_size = 20
-text = "จอมเวทเห็ดพิษยังครองป่า... ลุกขึ้นสู้อีกครั้งนะ นันตะ!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Hero" parent="." instance=ExtResource("10_hero")]
-position = Vector2(250, 420)
-rotation = -1.4
+[node name="Captain" parent="." instance=ExtResource("5_hero")]
+position = Vector2(230, 470)
+rotation = -1.45
 scale = Vector2(1.3, 1.3)
 
+[node name="Boss" type="Sprite2D" parent="."]
+position = Vector2(960, 420)
+scale = Vector2(1.6, 1.6)
+texture = SubResource("AtlasTexture_boss")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 300.0
+offset_top = 90.0
+offset_right = 900.0
+offset_bottom = 190.0
+theme = ExtResource("4_theme")
+theme_override_colors/font_color = Color(1, 0.35, 0.3, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.02, 0.05, 1)
+theme_override_constants/outline_size = 18
+theme_override_font_sizes/font_size = 76
+text = "เรือล่ม!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StoryLine" type="Label" parent="."]
+offset_left = 200.0
+offset_top = 200.0
+offset_right = 1000.0
+offset_bottom = 280.0
+theme = ExtResource("4_theme")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "กัปตันฉลามดำหัวเราะลั่นทะเล... แต่กัปตันโก้ไม่มีวันยอมแพ้!
+ลุกขึ้นแล้วออกเรืออีกครั้ง"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+offset_left = 400.0
+offset_top = 285.0
+offset_right = 800.0
+offset_bottom = 325.0
+theme = ExtResource("4_theme")
+theme_override_colors/font_color = Color(1, 0.87, 0.32, 1)
+theme_override_font_sizes/font_size = 26
+text = "คะแนนรวม: 0"
+horizontal_alignment = 1
+
+[node name="btnPlay" type="Button" parent="."]
+offset_left = 400.0
+offset_top = 350.0
+offset_right = 590.0
+offset_bottom = 410.0
+theme = ExtResource("4_theme")
+text = "เล่นอีกครั้ง"
+
+[node name="btnMenu" type="Button" parent="."]
+offset_left = 610.0
+offset_top = 350.0
+offset_right = 800.0
+offset_bottom = 410.0
+theme = ExtResource("4_theme")
+text = "เมนูหลัก"
+
 [node name="Sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_snd")
+stream = ExtResource("8_snd")
 autoplay = true
 bus = &"sfx"
+
+[connection signal="pressed" from="btnPlay" to="." method="_on_btn_play_pressed"]
+[connection signal="pressed" from="btnMenu" to="." method="_on_btn_menu_pressed"]

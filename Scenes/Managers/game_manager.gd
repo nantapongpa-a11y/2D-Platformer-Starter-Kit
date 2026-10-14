@@ -52,7 +52,8 @@ func damage(val=1):
 		death()
 
 func add_hp(val=1):
-	player_stats.data_add("hp",val)
+	var hp_max = get_stat("hp_max", 100)
+	player_stats.data_set("hp", min(get_stat("hp") + val, hp_max))
 
 func update_option():
 	var music_bus = AudioServer.get_bus_index("music")
@@ -65,7 +66,10 @@ func add_life():
 
 func death():
 	if player != null:
+		if player.is_dead:
+			return
 		await player.death_tween()
+	player_stats.data_set("hp", get_stat("hp_max", 100))
 	if player_stats.data_add("life",-1) <= 0:
 		get_tree().change_scene_to_file("res://Scenes/Levels/game_over.tscn")
 

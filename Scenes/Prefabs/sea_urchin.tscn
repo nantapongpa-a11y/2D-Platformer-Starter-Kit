@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://Assets/Sea/sea_urchin.png" id="1_urchin"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_urchin"]
+radius = 20.0
+
+[node name="SeaUrchin" type="StaticBody2D" groups=["Traps"]]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("1_urchin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_urchin")

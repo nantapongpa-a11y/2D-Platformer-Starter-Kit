@@ -1,7 +1,7 @@
 extends Area2D
 
-# Wind Feather (ขนนกวายุ) - original item of "Nanta and the Wind Feather"
-# Picking it up gives +5 score and lets the player run faster and jump higher.
+# Wind Conch (เปลือกหอยวายุ) - picking it up gives +5 score and lets
+# Captain Go run faster and jump higher for a few seconds.
 
 @export var boost_duration : float = 8.0
 
@@ -16,5 +16,5 @@ func _on_body_entered(body: Node2D) -> void:
 		AudioManager.powerup_sfx.play()
 		var ui = get_tree().current_scene.get_node_or_null("UserInterface")
 		if ui:
-			ui.alert("ขนนกวายุ! วิ่งเร็ว กระโดดสูง %d วินาที" % boost_duration)
+			ui.alert("เปลือกหอยวายุ! วิ่งเร็ว กระโดดสูง %d วินาที" % boost_duration)
 		queue_free()

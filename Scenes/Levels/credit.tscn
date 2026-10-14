@@ -1,101 +1,109 @@
 [gd_scene format=3 uid="uid://bajrtxxftc6wt"]
 
-[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="1_2g1tp"]
-[ext_resource type="Texture2D" uid="uid://1ay25i0wdihg" path="res://Assets/Icons/cpkku_dark.png" id="2_fnvqj"]
-[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="3_fnvqj"]
-[ext_resource type="PackedScene" uid="uid://bvoon20abmdym" path="res://Scenes/Sprites/student.tscn" id="10_hero"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/sea_backdrop.tscn" id="1_bd"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/parchment.png" id="3_paper"]
+[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="4_exit"]
+[ext_resource type="PackedScene" uid="uid://bvoon20abmdym" path="res://Scenes/Sprites/student.tscn" id="5_hero"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/pirate_grunt.png" id="6_grunt"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/pirate_crab.png" id="7_crab"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/pirate_skeleton.png" id="8_skel"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/boss_black_shark.png" id="9_boss"]
+[ext_resource type="Texture2D" uid="uid://1ay25i0wdihg" path="res://Assets/Icons/cpkku_dark.png" id="10_kku"]
 
-[node name="Node2D" type="Node2D" unique_id=264957255]
+[sub_resource type="AtlasTexture" id="AtlasTexture_grunt"]
+atlas = ExtResource("6_grunt")
+region = Rect2(0, 0, 96, 96)
 
-[node name="Control" type="Control" parent="." unique_id=423201679]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1154.0
-offset_bottom = 650.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_crab"]
+atlas = ExtResource("7_crab")
+region = Rect2(0, 0, 96, 96)
 
-[node name="CpkkuDark" type="Sprite2D" parent="Control" unique_id=813724852]
-position = Vector2(584, 71)
-texture = ExtResource("2_fnvqj")
+[sub_resource type="AtlasTexture" id="AtlasTexture_skel"]
+atlas = ExtResource("8_skel")
+region = Rect2(0, 0, 96, 96)
 
-[node name="Title" type="Label" parent="Control" unique_id=1640205557]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -148.0
-offset_top = 295.0
-offset_right = 153.0
-offset_bottom = 327.0
-grow_horizontal = 2
-theme = ExtResource("1_2g1tp")
-theme_override_colors/font_color = Color(0.88235295, 0.18039216, 0.1882353, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 24
-text = "Development Team"
+[sub_resource type="AtlasTexture" id="AtlasTexture_boss"]
+atlas = ExtResource("9_boss")
+region = Rect2(0, 0, 128, 144)
+
+[node name="Credit" type="Node2D"]
+
+[node name="SeaBackdrop" parent="." instance=ExtResource("1_bd")]
+show_ship = false
+
+[node name="Parchment" type="Sprite2D" parent="."]
+position = Vector2(600, 280)
+scale = Vector2(0.9, 0.86)
+texture = ExtResource("3_paper")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 300.0
+offset_top = 4.0
+offset_right = 900.0
+offset_bottom = 64.0
+theme = ExtResource("2_theme")
+theme_override_colors/font_color = Color(1, 0.87, 0.32, 1)
+theme_override_colors/font_outline_color = Color(0.3, 0.08, 0.04, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 44
+text = "เครดิต"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Title2" type="Label" parent="Control" unique_id=1645896659]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -167.0
-offset_top = 177.0
-offset_right = 207.0
-offset_bottom = 209.0
-grow_horizontal = 2
-theme = ExtResource("1_2g1tp")
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 16
-text = "At College of Computing, Khon Kaen University
-By  Asst.Dr. Wachirawut Thamviset"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="btnExit" parent="Control" unique_id=1633606001 instance=ExtResource("3_fnvqj")]
-layout_mode = 0
-offset_left = 33.0
-offset_right = 159.0
-
-[node name="Title3" type="Label" parent="Control" unique_id=1657901293]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -148.0
-offset_top = 129.0
-offset_right = 153.0
-offset_bottom = 161.0
-grow_horizontal = 2
-theme = ExtResource("1_2g1tp")
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 24
-text = "Computer Game Development  Course 2026   "
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Title4" type="Label" parent="Control" unique_id=2127691335]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -187.0
-offset_top = 360.0
-offset_right = 193.0
+[node name="Body" type="Label" parent="."]
+offset_left = 270.0
+offset_top = 125.0
+offset_right = 930.0
 offset_bottom = 440.0
-grow_horizontal = 2
-theme = ExtResource("1_2g1tp")
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 16
-text = "673380313-3  ณันทพงศ์ พยัคมะเริง
-เกม: นันตะ กับ ขนนกวายุ
-(ตัวละคร ไอเทม และเพลง สร้างเอง)"
+theme = ExtResource("2_theme")
+theme_override_colors/font_color = Color(0.29, 0.16, 0.06, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+text = "กัปตันโก้ ผจญภัยทะเลโจรสลัด
+
+ผู้พัฒนา: 673380313-3  ณันทพงศ์ พยัคมะเริง
+
+ตัวละคร ศัตรู ฉาก ไอเทม เพลงประกอบ และเสียงเอฟเฟกต์
+สร้างเองทั้งหมดด้วยโค้ด (โฟลเดอร์ scripts/)
+
+วิชา Computer Game Development 2026
+วิทยาลัยการคอมพิวเตอร์ มหาวิทยาลัยขอนแก่น
+ต้นแบบ: 2D Platformer Starter Kit (AdilDevStuff)
+ดัดแปลงเพื่อการศึกษาโดย ผศ.ดร.วชิราวุธ ธรรมวิเศษ"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Captain" parent="." instance=ExtResource("5_hero")]
+position = Vector2(150, 610)
+scale = Vector2(1.2, 1.2)
 
-[node name="Hero" parent="." instance=ExtResource("10_hero")]
-position = Vector2(950, 520)
-scale = Vector2(1.3, 1.3)
+[node name="Grunt" type="Sprite2D" parent="."]
+position = Vector2(760, 565)
+texture = SubResource("AtlasTexture_grunt")
+
+[node name="Crab" type="Sprite2D" parent="."]
+position = Vector2(860, 572)
+texture = SubResource("AtlasTexture_crab")
+
+[node name="Skeleton" type="Sprite2D" parent="."]
+position = Vector2(960, 565)
+texture = SubResource("AtlasTexture_skel")
+
+[node name="Boss" type="Sprite2D" parent="."]
+position = Vector2(1090, 545)
+scale = Vector2(1.1, 1.1)
+texture = SubResource("AtlasTexture_boss")
+
+[node name="Kku" type="Sprite2D" parent="."]
+position = Vector2(1105, 36)
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("10_kku")
+
+[node name="btnExit" parent="." instance=ExtResource("4_exit")]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 164.0
+offset_bottom = 76.0
+theme = ExtResource("2_theme")
+text = "กลับ"

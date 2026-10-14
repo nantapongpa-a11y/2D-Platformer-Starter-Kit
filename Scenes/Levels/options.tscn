@@ -1,24 +1,51 @@
 [gd_scene format=3 uid="uid://cuq7vusmo7y5g"]
 
-[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="1_6oxap"]
-[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_wto1r"]
+[ext_resource type="Script" path="res://Scenes/Levels/options.gd" id="1_opt"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/sea_backdrop.tscn" id="2_bd"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="3_theme"]
 
-[node name="Node2D" type="Node2D" unique_id=1481218610]
+[node name="Options" type="Node2D"]
+script = ExtResource("1_opt")
 
-[node name="btnExit" parent="." unique_id=1633606001 instance=ExtResource("1_6oxap")]
-offset_left = 48.0
-offset_top = 32.0
-offset_right = 174.0
-offset_bottom = 86.0
+[node name="SeaBackdrop" parent="." instance=ExtResource("2_bd")]
+show_ship = false
 
-[node name="Title" type="Label" parent="." unique_id=714304452]
-offset_left = 412.0
-offset_top = 45.0
-offset_right = 713.0
-offset_bottom = 77.0
-theme = ExtResource("2_wto1r")
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 24
-text = "Game Options"
+[node name="Panel" type="PanelContainer" parent="."]
+offset_left = 380.0
+offset_top = 130.0
+offset_right = 820.0
+offset_bottom = 470.0
+theme = ExtResource("3_theme")
+
+[node name="Box" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Title" type="Label" parent="Panel/Box"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.87, 0.32, 1)
+theme_override_colors/font_outline_color = Color(0.3, 0.08, 0.04, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 44
+text = "ตั้งค่า"
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="Music" type="CheckButton" parent="Panel/Box"]
+layout_mode = 2
+button_pressed = true
+text = "เพลงประกอบ"
+
+[node name="Sound" type="CheckButton" parent="Panel/Box"]
+layout_mode = 2
+button_pressed = true
+text = "เสียงเอฟเฟกต์"
+
+[node name="btnBack" type="Button" parent="Panel/Box"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "กลับเมนู"
+
+[connection signal="toggled" from="Panel/Box/Music" to="." method="_on_music_toggled"]
+[connection signal="toggled" from="Panel/Box/Sound" to="." method="_on_sound_toggled"]
+[connection signal="pressed" from="Panel/Box/btnBack" to="." method="_on_btn_back_pressed"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dabag2r57aued"]
 
 [ext_resource type="Script" uid="uid://ciumpebi1qstt" path="res://Scenes/Prefabs/heal_potion.gd" id="1_y1g4b"]
-[ext_resource type="Texture2D" uid="uid://cmy5hg7lr4tmg" path="res://Assets/Spritesheet/PotionRed.png" id="2_vwrf6"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/coconut.png" id="2_vwrf6"]
 [ext_resource type="Texture2D" uid="uid://621as0fwjhum" path="res://Assets/Textures/star_07.png" id="3_u508d"]
 
 [sub_resource type="Animation" id="Animation_4q5vp"]

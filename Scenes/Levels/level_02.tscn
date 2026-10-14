@@ -1,38 +1,178 @@
-[gd_scene format=3 uid="uid://cppg5yoxwv0dy"]
+[gd_scene format=3]
 
-[ext_resource type="PackedScene" uid="uid://bjntpxb1c8jxn" path="res://Scenes/Levels/base_level.tscn" id="1_3fxa7"]
-[ext_resource type="Texture2D" uid="uid://dkc8rdq3j7ppf" path="res://Assets/BG/mountainA.png" id="2_2e1f7"]
-[ext_resource type="PackedScene" uid="uid://towe6jtciome" path="res://Scenes/Levels/level_03.tscn" id="2_q8k1b"]
-[ext_resource type="PackedScene" path="res://Scenes/Prefabs/wind_feather.tscn" id="20_feath"]
+[ext_resource type="PackedScene" uid="uid://bjntpxb1c8jxn" path="res://Scenes/Levels/base_level.tscn" id="base"]
+[ext_resource type="TileSet" path="res://Scenes/Prefabs/sea_tile_set.tres" id="tiles"]
+[ext_resource type="PackedScene" uid="uid://bfmh3fm2de78o" path="res://Scenes/Prefabs/coin.tscn" id="coin"]
+[ext_resource type="PackedScene" uid="uid://dabag2r57aued" path="res://Scenes/Prefabs/heal_potion.tscn" id="heal"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/sea_conch.tscn" id="conch"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/sea_urchin.tscn" id="urchin"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/anchor_trap.tscn" id="anchor"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/checkpoint.tscn" id="flag"]
+[ext_resource type="PackedScene" path="res://Scenes/Actors/pirate_grunt.tscn" id="grunt"]
+[ext_resource type="PackedScene" path="res://Scenes/Actors/pirate_crab.tscn" id="crab"]
+[ext_resource type="PackedScene" path="res://Scenes/Actors/pirate_skeleton.tscn" id="skeleton"]
+[ext_resource type="PackedScene" path="res://Scenes/Actors/boss_black_shark.tscn" id="boss"]
+[ext_resource type="PackedScene" uid="uid://bs70y1kitjd3r" path="res://Scenes/Actors/enemy_spawn.tscn" id="spawn"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="theme"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/palm_tree.png" id="palm"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/pirate_mast.png" id="mast"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/lantern.png" id="lantern"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/treasure_pile.png" id="pile"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/signpost.png" id="sign"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/level_03.tscn" id="next"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhitk"]
-size = Vector2(1210, 20)
+[sub_resource type="RectangleShape2D" id="sea_shape"]
+size = Vector2(6688, 300)
 
-[node name="BaseLevel" unique_id=1997201631 instance=ExtResource("1_3fxa7")]
+[sub_resource type="RectangleShape2D" id="wall_shape"]
+size = Vector2(40, 2000)
 
-[node name="LevelFinishDoor" parent="." index="0" unique_id=1788542095]
-position = Vector2(1065, 334)
-next_scene = ExtResource("2_q8k1b")
+[node name="BaseLevel" unique_id=1997201631 instance=ExtResource("base")]
 
-[node name="Background1" parent="Level" parent_id_path=PackedInt32Array(1752500785) index="0" unique_id=1072429833]
-metadata/_edit_lock_ = true
+[node name="LevelFinishDoor" parent="." unique_id=1788542095]
+position = Vector2(5792, 528)
+next_scene = ExtResource("next")
 
-[node name="Background2" parent="Level" parent_id_path=PackedInt32Array(1752500785) index="1" unique_id=1070008654]
-metadata/_edit_lock_ = true
+[node name="Ground" type="TileMapLayer" parent="Level"]
+tile_map_data = PackedByteArray("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AAAyAAsAAAAHAAEAAAA2AAsAAAAHAAEAAAA6AAsAAAAHAAEAAAA+AAsAAAAHAAEAAABAAAsAAAAHAAEAAABOAAsAAAAHAAEAAABSAAsAAAAHAAEAAABWAAsAAAAHAAEAAABaAAsAAAAEAAEAAABbAAsAAAAFAAEAAAAAAAwAAAAFAAAAAAABAAwAAAAFAAAAAAACAAwAAAAFAAAAAAADAAwAAAAFAAAAAAAEAAwAAAAFAAAAAAAFAAwAAAAFAAAAAAAGAAwAAAAFAAAAAAAHAAwAAAAFAAAAAAAIAAwAAAAFAAAAAAAJAAwAAAAFAAAAAAAKAAwAAAAGAAEAAAAOAAwAAAAHAAEAAAASAAwAAAAHAAEAAAAWAAwAAAAHAAEAAAAYAAwAAAAHAAEAAAAbAAwAAAAHAAEAAAAfAAwAAAAHAAEAAAAjAAwAAAAHAAEAAAAmAAwAAAAHAAEAAAAoAAwAAAAHAAEAAAAsAAwAAAAHAAEAAAAwAAwAAAAHAAEAAAAyAAwAAAAHAAEAAAA2AAwAAAAHAAEAAAA6AAwAAAAHAAEAAAA+AAwAAAAHAAEAAABAAAwAAAAHAAEAAABOAAwAAAAHAAEAAABSAAwAAAAHAAEAAABWAAwAAAAHAAEAAABaAAwAAAAEAAEAAABbAAwAAAAFAAEAAAA=")
+tile_set = ExtResource("tiles")
 
-[node name="MountainA" type="Sprite2D" parent="Level/Background2" index="0" unique_id=1142107788]
-position = Vector2(270.25, 217.24998)
-scale = Vector2(2.1334267, 2.4474432)
-texture = ExtResource("2_2e1f7")
+[node name="Sea" type="TileMapLayer" parent="Level"]
+z_index = 3
+tile_map_data = PackedByteArray("AAALAAsAAAADAAMAAAAMAAsAAAADAAMAAAANAAsAAAADAAMAAAAPAAsAAAADAAMAAAAQAAsAAAADAAMAAAARAAsAAAADAAMAAAATAAsAAAADAAMAAAAUAAsAAAADAAMAAAAVAAsAAAADAAMAAAAXAAsAAAADAAMAAAAZAAsAAAADAAMAAAAaAAsAAAADAAMAAAAcAAsAAAADAAMAAAAdAAsAAAADAAMAAAAeAAsAAAADAAMAAAAgAAsAAAADAAMAAAAhAAsAAAADAAMAAAAiAAsAAAADAAMAAAAkAAsAAAADAAMAAAAlAAsAAAADAAMAAAAnAAsAAAADAAMAAAApAAsAAAADAAMAAAAqAAsAAAADAAMAAAArAAsAAAADAAMAAAAtAAsAAAADAAMAAAAuAAsAAAADAAMAAAAvAAsAAAADAAMAAAAxAAsAAAADAAMAAAAzAAsAAAADAAMAAAA0AAsAAAADAAMAAAA1AAsAAAADAAMAAAA3AAsAAAADAAMAAAA4AAsAAAADAAMAAAA5AAsAAAADAAMAAAA7AAsAAAADAAMAAAA8AAsAAAADAAMAAAA9AAsAAAADAAMAAAA/AAsAAAADAAMAAABBAAsAAAADAAMAAABCAAsAAAADAAMAAABDAAsAAAADAAMAAABEAAsAAAADAAMAAABFAAsAAAADAAMAAABGAAsAAAADAAMAAABHAAsAAAADAAMAAABIAAsAAAADAAMAAABJAAsAAAADAAMAAABKAAsAAAADAAMAAABLAAsAAAADAAMAAABMAAsAAAADAAMAAABNAAsAAAADAAMAAABPAAsAAAADAAMAAABQAAsAAAADAAMAAABRAAsAAAADAAMAAABTAAsAAAADAAMAAABUAAsAAAADAAMAAABVAAsAAAADAAMAAABXAAsAAAADAAMAAABYAAsAAAADAAMAAABZAAsAAAADAAMAAAALAAwAAAAEAAMAAAAMAAwAAAAEAAMAAAANAAwAAAAEAAMAAAAPAAwAAAAEAAMAAAAQAAwAAAAEAAMAAAARAAwAAAAEAAMAAAATAAwAAAAEAAMAAAAUAAwAAAAEAAMAAAAVAAwAAAAEAAMAAAAXAAwAAAAEAAMAAAAZAAwAAAAEAAMAAAAaAAwAAAAEAAMAAAAcAAwAAAAEAAMAAAAdAAwAAAAEAAMAAAAeAAwAAAAEAAMAAAAgAAwAAAAEAAMAAAAhAAwAAAAEAAMAAAAiAAwAAAAEAAMAAAAkAAwAAAAEAAMAAAAlAAwAAAAEAAMAAAAnAAwAAAAEAAMAAAApAAwAAAAEAAMAAAAqAAwAAAAEAAMAAAArAAwAAAAEAAMAAAAtAAwAAAAEAAMAAAAuAAwAAAAEAAMAAAAvAAwAAAAEAAMAAAAxAAwAAAAEAAMAAAAzAAwAAAAEAAMAAAA0AAwAAAAEAAMAAAA1AAwAAAAEAAMAAAA3AAwAAAAEAAMAAAA4AAwAAAAEAAMAAAA5AAwAAAAEAAMAAAA7AAwAAAAEAAMAAAA8AAwAAAAEAAMAAAA9AAwAAAAEAAMAAAA/AAwAAAAEAAMAAABBAAwAAAAEAAMAAABCAAwAAAAEAAMAAABDAAwAAAAEAAMAAABEAAwAAAAEAAMAAABFAAwAAAAEAAMAAABGAAwAAAAEAAMAAABHAAwAAAAEAAMAAABIAAwAAAAEAAMAAABJAAwAAAAEAAMAAABKAAwAAAAEAAMAAABLAAwAAAAEAAMAAABMAAwAAAAEAAMAAABNAAwAAAAEAAMAAABPAAwAAAAEAAMAAABQAAwAAAAEAAMAAABRAAwAAAAEAAMAAABTAAwAAAAEAAMAAABUAAwAAAAEAAMAAABVAAwAAAAEAAMAAABXAAwAAAAEAAMAAABYAAwAAAAEAAMAAABZAAwAAAAEAAMAAAA=")
+tile_set = ExtResource("tiles")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Level" parent_id_path=PackedInt32Array(1752500785) index="2" unique_id=1184612706]
+[node name="SeaKill" type="StaticBody2D" parent="Level" groups=["Sea"]]
+collision_layer = 8
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticBody2D" index="0" unique_id=1479566011]
-position = Vector2(554, 413)
-shape = SubResource("RectangleShape2D_hhitk")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/SeaKill"]
+position = Vector2(2944.0, 890)
+shape = SubResource("sea_shape")
 
-[node name="Label" parent="UserInterface" parent_id_path=PackedInt32Array(1799764374) index="1" unique_id=1103718868]
-text = "Level 2"
+[node name="Walls" type="StaticBody2D" parent="Level"]
 
-[node name="WindFeather" parent="Coins" parent_id_path=PackedInt32Array(1530662565) instance=ExtResource("20_feath")]
-position = Vector2(450, 330)
+[node name="Left" type="CollisionShape2D" parent="Level/Walls"]
+position = Vector2(-20, 0)
+shape = SubResource("wall_shape")
+
+[node name="Right" type="CollisionShape2D" parent="Level/Walls"]
+position = Vector2(5908, 0)
+shape = SubResource("wall_shape")
+
+[node name="Decor" type="Node2D" parent="Level"]
+z_index = -1
+
+[node name="Traps" type="Node2D" parent="Level"]
+
+[node name="Player" parent="." unique_id=850213228]
+position = Vector2(160, 574)
+
+[node name="Palm1" type="Sprite2D" parent="Level/Decor"]
+position = Vector2(32, 416)
+texture = ExtResource("palm")
+
+[node name="Grunt1" parent="Enemies" instance=ExtResource("grunt")]
+position = Vector2(1248, 574)
+direction = -1
+
+[node name="Coin1" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(992, 416)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(1056, 352)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(1120, 416)
+
+[node name="Anchor1" parent="Level/Traps" instance=ExtResource("anchor")]
+position = Vector2(2080, 256)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(1888, 480)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(1952, 480)
+
+[node name="Crab1" parent="Enemies" instance=ExtResource("crab")]
+position = Vector2(2336, 574)
+direction = -1
+
+[node name="Lantern1" type="Sprite2D" parent="Level/Decor"]
+position = Vector2(2720, 288)
+texture = ExtResource("lantern")
+
+[node name="Grunt2" parent="Enemies" instance=ExtResource("grunt")]
+position = Vector2(2912, 446)
+direction = -1
+
+[node name="Checkpoint1" parent="Level" instance=ExtResource("flag")]
+position = Vector2(3040, 448)
+
+[node name="Urchin1" parent="Level/Traps" instance=ExtResource("urchin")]
+position = Vector2(3424, 576)
+
+[node name="Urchin2" parent="Level/Traps" instance=ExtResource("urchin")]
+position = Vector2(3936, 576)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(3616, 416)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(3680, 416)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(3744, 416)
+
+[node name="Heal1" parent="Coins" instance=ExtResource("heal")]
+position = Vector2(3872, 416)
+
+[node name="Conch1" parent="Coins" instance=ExtResource("conch")]
+position = Vector2(4576, 352)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(4320, 480)
+
+[node name="Coin10" parent="Coins" instance=ExtResource("coin")]
+position = Vector2(4832, 416)
+
+[node name="Anchor2" parent="Level/Traps" instance=ExtResource("anchor")]
+position = Vector2(5280, 256)
+
+[node name="Grunt3" parent="Enemies" instance=ExtResource("grunt")]
+position = Vector2(5600, 574)
+direction = -1
+
+[node name="Spawner1" parent="Enemies" instance=ExtResource("spawn")]
+position = Vector2(3680, 416)
+enemy_scenes = Array[PackedScene]([ExtResource("grunt"), ExtResource("crab")])
+speed_range = Array[int]([60, 70, 80])
+respawn_time = Array[int]([8, 12])
+max_instance = 2
+
+[node name="Hint1" type="Label" parent="Text"]
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 828.0
+offset_bottom = 346.0
+theme = ExtResource("theme")
+theme_override_colors/font_color = Color(1, 0.97, 0.85, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.1, 0.25, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+text = "ท่าเรือของพวกโจรสลัด... ระวังสมอเหวี่ยง!"
+
+[node name="Hint2" type="Label" parent="Text"]
+offset_left = 5056.0
+offset_top = 256.0
+offset_right = 5756.0
+offset_bottom = 346.0
+theme = ExtResource("theme")
+theme_override_colors/font_color = Color(1, 0.97, 0.85, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.1, 0.25, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+text = "ไปยึดเรือโจรสลัดกันเถอะ!"
+
+[node name="Label" parent="UserInterface" unique_id=1103718868]
+text = "ด่าน 2: ท่าเรือโจรสลัด"

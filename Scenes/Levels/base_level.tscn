@@ -4,11 +4,27 @@
 [ext_resource type="PackedScene" uid="uid://cyti38f0lagf2" path="res://Scenes/Prefabs/level_finish_door.tscn" id="2_3b8rg"]
 [ext_resource type="PackedScene" uid="uid://w7m6tehvvy3g" path="res://Scenes/Actors/player.tscn" id="4_hr04v"]
 [ext_resource type="PackedScene" uid="uid://cdwabmqtlxr1y" path="res://Scenes/Levels/game_ui.tscn" id="5_71eip"]
-[ext_resource type="AudioStream" path="res://Assets/Sound/bgm_wind_feather.ogg" id="6_34r03"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/sea_adventure.ogg" id="6_34r03"]
 [ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="7_xghcx"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/sky_day.png" id="8_sky"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/far_sea.png" id="9_far"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/waves.png" id="10_waves"]
 
 [node name="BaseLevel" type="Node2D" unique_id=1997201631]
 script = ExtResource("1_iemmg")
+
+[node name="SkyLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Sky" type="TextureRect" parent="SkyLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_sky")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="LevelFinishDoor" parent="." unique_id=1788542095 instance=ExtResource("2_3b8rg")]
 z_index = 1
@@ -16,17 +32,27 @@ position = Vector2(1592, 400)
 
 [node name="Level" type="Node2D" parent="." unique_id=1752500785]
 
-[node name="Background1" type="Parallax2D" parent="Level" unique_id=1072429833]
+[node name="FarBG" type="Parallax2D" parent="Level"]
 z_index = -10
-scroll_scale = Vector2(0.1, 0.1)
+scroll_scale = Vector2(0.15, 0)
 repeat_size = Vector2(1152, 0)
-repeat_times = 2
+repeat_times = 3
 
-[node name="Background2" type="Parallax2D" parent="Level" unique_id=1070008654]
-z_index = -10
-scroll_scale = Vector2(0.5, 0.5)
+[node name="Sprite2D" type="Sprite2D" parent="Level/FarBG"]
+texture = ExtResource("9_far")
+centered = false
+
+[node name="Waves" type="Parallax2D" parent="Level"]
+z_index = -9
+scroll_scale = Vector2(0.4, 0)
 repeat_size = Vector2(1152, 0)
-repeat_times = 2
+autoscroll = Vector2(-18, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/Waves"]
+position = Vector2(0, 476)
+texture = ExtResource("10_waves")
+centered = false
 
 [node name="Player" parent="." unique_id=850213228 instance=ExtResource("4_hr04v")]
 unique_name_in_owner = true
@@ -46,15 +72,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = -11.5
-offset_right = 27.0
-offset_bottom = 11.5
+offset_left = -300.0
+offset_top = -60.0
+offset_right = 300.0
+offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(300, 60)
 theme = ExtResource("7_xghcx")
-theme_override_font_sizes/font_size = 60
+theme_override_colors/font_color = Color(1, 0.84, 0.3, 1)
+theme_override_colors/font_outline_color = Color(0.25, 0.12, 0.05, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 52
 text = "Level x"
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="Text" type="Node2D" parent="." unique_id=416249055]
@@ -65,4 +97,5 @@ bus = &"music"
 
 [connection signal="hit_enemy" from="Player" to="." method="_on_player_hit_enemy"]
 [connection signal="hit_trap" from="Player" to="." method="_on_player_hit_trap"]
+[connection signal="fell_in_sea" from="Player" to="." method="_on_player_fell_in_sea"]
 [connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

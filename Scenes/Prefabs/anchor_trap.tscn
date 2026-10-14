@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/Prefabs/anchor_trap.gd" id="1_anchor"]
+[ext_resource type="Texture2D" path="res://Assets/Sea/anchor_trap.png" id="2_anchor"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_anchor"]
+radius = 30.0
+
+[sub_resource type="Animation" id="Animation_swing"]
+resource_name = "swing"
+length = 2.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4, 2.8),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [-0.95, 0.95, -0.95]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_anchor"]
+_data = {
+&"swing": SubResource("Animation_swing")
+}
+
+[node name="AnchorTrap" type="Node2D"]
+script = ExtResource("1_anchor")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+position = Vector2(0, 144)
+texture = ExtResource("2_anchor")
+
+[node name="Hit" type="StaticBody2D" parent="Pivot" groups=["Traps"]]
+position = Vector2(0, 250)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hit"]
+shape = SubResource("CircleShape2D_anchor")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries/ = SubResource("AnimationLibrary_anchor")
