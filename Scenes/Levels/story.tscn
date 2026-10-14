@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Scenes/Levels/story.gd" id="1_story"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_story"]
+[ext_resource type="PackedScene" uid="uid://bvoon20abmdym" path="res://Scenes/Sprites/student.tscn" id="3_story"]
+
+[node name="Story" type="Node2D"]
+script = ExtResource("1_story")
+
+[node name="BG" type="ColorRect" parent="."]
+offset_right = 1200.0
+offset_bottom = 650.0
+color = Color(0.09, 0.12, 0.25, 1)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 300.0
+offset_top = 30.0
+offset_right = 1150.0
+offset_bottom = 100.0
+theme = ExtResource("2_story")
+theme_override_colors/font_color = Color(0.55, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+text = "นันตะ กับ ขนนกวายุ"
+
+[node name="StoryText" type="Label" parent="."]
+offset_left = 300.0
+offset_top = 110.0
+offset_right = 1150.0
+offset_bottom = 520.0
+theme = ExtResource("2_story")
+theme_override_font_sizes/font_size = 22
+text = "หมู่บ้านลมหอมมี \"ขนนกวายุ\" คอยพัดกังหันลมให้ทุกคนมีน้ำมีข้าวกิน
+แต่คืนหนึ่ง จอมเวทเห็ดพิษ ได้ขโมยขนนกไปจนหมด
+แล้วปล่อยกองทัพเห็ดและสไลม์ออกมาเต็มป่า
+
+\"นันตะ\" เด็กฝึกเวทในชุดคลุมสีน้ำเงิน ถือคทาไฟคู่ใจ
+ออกเดินทางผ่านป่า หุบเขา และหอคอย เพื่อนำขนนกกลับมา
+
+- เก็บเหรียญ และ ขนนกวายุ (วิ่งเร็ว + กระโดดสูง 8 วินาที)
+- ยิงบอลไฟ (X) หรือกระโดดหลบ เห็ดและสไลม์
+- ระวังกับดัก แล้วเข้าประตูเพื่อไปด่านต่อไป"
+
+[node name="Hero" parent="." instance=ExtResource("3_story")]
+position = Vector2(150, 470)
+scale = Vector2(1.6, 1.6)
+
+[node name="btnGo" type="Button" parent="."]
+offset_left = 640.0
+offset_top = 540.0
+offset_right = 880.0
+offset_bottom = 604.0
+theme = ExtResource("2_story")
+text = "เริ่มผจญภัย"
+
+[connection signal="pressed" from="btnGo" to="." method="_on_btn_go_pressed"]

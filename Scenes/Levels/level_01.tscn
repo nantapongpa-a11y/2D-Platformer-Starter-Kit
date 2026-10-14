@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="6_taws2"]
 [ext_resource type="PackedScene" uid="uid://b48s52q3f64kl" path="res://Scenes/Actors/monster_mushroom.tscn" id="7_mb1if"]
 [ext_resource type="PackedScene" uid="uid://bs70y1kitjd3r" path="res://Scenes/Actors/enemy_spawn.tscn" id="9_ge2ro"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/wind_feather.tscn" id="20_feath"]
 
 [node name="BaseLevel" unique_id=1997201631 instance=ExtResource("1_l0dwn")]
 
@@ -85,10 +86,10 @@ offset_top = 105.0
 offset_right = 285.0
 offset_bottom = 234.0
 theme = ExtResource("6_taws2")
-text = "ด่านตัวอย่าง
-A D เพื่อเดิน
-Space กระโดด
-X  ยิงบอลไฟ กำจัด เห็ด และ สไลม์"
+text = "ด่าน 1 ป่าเห็ดพิษ
+A D เพื่อเดิน  Space กระโดด
+X  ยิงบอลไฟ กำจัด เห็ด และ สไลม์
+เก็บขนนกวายุ วิ่งเร็ว+กระโดดสูง"
 
 [node name="Label2" type="Label" parent="Text" parent_id_path=PackedInt32Array(416249055) index="1" unique_id=1040528611]
 offset_left = 984.0
@@ -105,3 +106,6 @@ offset_right = 585.0
 offset_bottom = 575.0
 theme = ExtResource("6_taws2")
 text = "กระโดดข้ามเครื่องบด"
+
+[node name="WindFeather" parent="Coins" parent_id_path=PackedInt32Array(1530662565) instance=ExtResource("20_feath")]
+position = Vector2(200, 370)

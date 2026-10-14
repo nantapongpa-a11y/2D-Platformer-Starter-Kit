@@ -1,4 +1,55 @@
-# 2D Platformer Starter Kit
+# นันตะ กับ ขนนกวายุ (Nanta and the Wind Feather)
+
+แบบฝึกหัดที่ 4 สร้างเกมแบบ 2D Platform Side-Scrolling วิชา Computer Game Development
+
+- **รหัสนักศึกษา:** 673380313-3
+- **ชื่อ-สกุล:** ณันทพงศ์ พยัคมะเริง
+
+## Play / Demo
+
+- [Play Game (GitHub Pages)](https://nantapongpa-a11y.github.io/2D-Platformer-Starter-Kit/)
+- [Clip Demo VDO](https://youtu.be/xxxx) <!-- TODO: ใส่ลิงก์คลิปเล่นเกม ~2 นาที -->
+
+<img src="docs/demo1.jpg" width="300"> <img src="docs/demo2.jpg" width="300"> <img src="docs/demo3.jpg" width="300">
+
+## Game Story
+
+หมู่บ้านลมหอมมี "ขนนกวายุ" คอยพัดกังหันลมให้ทุกคนมีน้ำมีข้าวกิน
+แต่คืนหนึ่ง **จอมเวทเห็ดพิษ** ได้ขโมยขนนกไปจนหมด แล้วปล่อยกองทัพเห็ดและสไลม์ออกมาเต็มป่า
+
+**นันตะ** เด็กฝึกเวทในชุดคลุมสีน้ำเงิน ถือคทาไฟคู่ใจ ออกเดินทางผ่านป่า หุบเขา และหอคอย
+เพื่อเก็บขนนกวายุกลับมา และทำให้กังหันลมของหมู่บ้านกลับมาหมุนอีกครั้ง
+
+## สิ่งที่สร้างเอง
+
+| สิ่งที่สร้าง | รายละเอียด | ไฟล์ |
+|---|---|---|
+| ตัวละคร "นันตะ" | วาดใหม่ทั้งตัว (ฮู้ดสีน้ำเงินมีดาว ผ้าพันคอแดง เข็มขัดทอง รองเท้าบูท) วางชิ้นส่วนตาม rig Skeleton2D เดิม จึงใช้ animation Idle / Walk / Jump / Attack ได้ทันที | `Assets/Spritesheet/hero_nanta.png` |
+| ไอเทม "ขนนกวายุ" | เก็บแล้วได้ +5 คะแนน วิ่งเร็วขึ้น 40% และกระโดดสูงขึ้น 25% เป็นเวลา 8 วินาที (มีเอฟเฟกต์ฝุ่นตอนวิ่ง) | `Scenes/Prefabs/wind_feather.tscn` |
+| เพลงประกอบ "Wind Feather" | เพลงชิปทูน 140 BPM แต่งโน้ตเอง (Am-F-C-G) มี lead / bass / arpeggio / กลอง แปลงเป็น .ogg mono 80 kbps | `Assets/Sound/bgm_wind_feather.ogg` |
+| เสียง Power-up | เสียงตอนเก็บขนนก | `Assets/Sound/FX/powerup.wav` |
+| ฉากเนื้อเรื่อง | หน้าเล่าเรื่องก่อนเริ่มด่าน 1 พร้อมตัวละคร | `Scenes/Levels/story.tscn` |
+
+ภาพ ไอเทม และเสียงทั้งหมดสร้างด้วยโค้ดใน [`scripts/make_assets.py`](scripts/make_assets.py) (รันใหม่ได้ด้วย `python scripts/make_assets.py`)
+
+## สิ่งที่แก้ไขเพิ่ม
+
+- เมนู: ชื่อเกม, ปุ่ม Exit, Start ไปหน้าเนื้อเรื่องก่อนเข้าด่าน
+- Credit: ใส่รหัสและชื่อ-สกุล พร้อมภาพตัวละคร
+- Game Over / You Win: ข้อความตามเนื้อเรื่อง ภาพตัวละคร และเสียง
+- Export เป็น Web ไว้ในโฟลเดอร์ `docs` (`docs/index.html`)
+
+## วิธีเล่น
+
+| ปุ่ม | การทำงาน |
+|---|---|
+| A / D หรือ ลูกศรซ้าย-ขวา | เดิน |
+| Space / W | กระโดด (กระโดด 2 ครั้งได้) |
+| X | ยิงบอลไฟ |
+
+---
+
+# 2D Platformer Starter Kit (ต้นฉบับ)
 
 This starter kit provides all the essential mechanics needed to build a complete 2D platformer game in Godot 4.7. It is designed as a hands-on learning resource for students taking the **Computer Game Development** course at the **College of Computing, Khon Kaen University**.
 

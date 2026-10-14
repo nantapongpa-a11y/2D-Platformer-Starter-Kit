@@ -29,6 +29,11 @@ var is_attacking = false
 var shoot_cooldown_timer = 0.0
 var can_damage = true
 
+# Wind Feather power-up (run faster + jump higher for a short time)
+var base_move_speed : float
+var base_jump_force : float
+var boost_time : float = 0.0
+
 @onready var player_sprite : AnimationPlayer = $student/AnimationPlayer
 @onready var player_node = $student
 @onready var bullet_marker = $BulletMarker
@@ -40,6 +45,8 @@ var can_damage = true
 # --------- BUILT-IN FUNCTIONS ---------- #
 func _ready() -> void:
 	spawn_point = global_position
+	base_move_speed = move_speed
+	base_jump_force = jump_force
 	if GameManager.save_player_position.x != 0:
 		global_position =  GameManager.save_player_position
 		GameManager.save_player_position = Vector2.ZERO
@@ -56,6 +63,11 @@ func _process(_delta):
 	handle_shooting()
 	if shoot_cooldown_timer > 0:
 		shoot_cooldown_timer -= _delta
+	if boost_time > 0:
+		boost_time -= _delta
+		if boost_time <= 0:
+			move_speed = base_move_speed
+			jump_force = base_jump_force
 	
 # --------- CUSTOM FUNCTIONS ---------- #
 
@@ -100,9 +112,15 @@ func jump():
 	AudioManager.jump_sfx.play()
 	velocity.y = -jump_force
 
+# Called by the Wind Feather item
+func wind_boost(duration : float = 8.0):
+	boost_time = duration
+	move_speed = base_move_speed * 1.4
+	jump_force = base_jump_force * 1.25
+
 # Handle Player Animations
 func player_animations():
-	particle_trails.emitting = false
+	particle_trails.emitting = boost_time > 0
 	if is_attacking:
 		return
 	

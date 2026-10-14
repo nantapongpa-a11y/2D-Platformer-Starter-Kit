@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://tkynu7pd01lh" path="res://Scenes/Levels/menu.gd" id="1_hq2ph"]
 [ext_resource type="Texture2D" uid="uid://1ay25i0wdihg" path="res://Assets/Icons/cpkku_dark.png" id="2_7pnm7"]
 [ext_resource type="Texture2D" uid="uid://cdgognnt83s33" path="res://icon.svg" id="3_7pnm7"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/wind_feather.png" id="4_feath"]
 
 [node name="Node2D" type="Node2D" unique_id=827773846]
 script = ExtResource("1_hq2ph")
@@ -63,6 +64,41 @@ offset_bottom = 435.0
 grow_horizontal = 2
 text = "Credit"
 
+[node name="btnExit" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.5
+offset_top = 441.0
+offset_right = 78.5
+offset_bottom = 505.0
+grow_horizontal = 2
+text = "Exit"
+
+[node name="GameTitle" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 30.0
+offset_right = 400.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.55, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.12, 0.3, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 56
+text = "นันตะ กับ ขนนกวายุ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Feather" type="Sprite2D" parent="."]
+position = Vector2(300, 300)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("4_feath")
+
 [node name="CpkkuDark" type="Sprite2D" parent="." unique_id=2047758235]
 position = Vector2(1006, 611)
 scale = Vector2(0.61328125, 0.6486486)
@@ -77,3 +113,4 @@ texture = ExtResource("3_7pnm7")
 [connection signal="pressed" from="UI/btnContinue" to="." method="_on_btn_continue_pressed"]
 [connection signal="pressed" from="UI/btnOption" to="." method="_on_btn_option_pressed"]
 [connection signal="pressed" from="UI/btnCredit" to="." method="_on_btn_credit_pressed"]
+[connection signal="pressed" from="UI/btnExit" to="." method="_on_btn_exit_pressed"]

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bjntpxb1c8jxn" path="res://Scenes/Levels/base_level.tscn" id="1_3fxa7"]
 [ext_resource type="Texture2D" uid="uid://dkc8rdq3j7ppf" path="res://Assets/BG/mountainA.png" id="2_2e1f7"]
 [ext_resource type="PackedScene" uid="uid://towe6jtciome" path="res://Scenes/Levels/level_03.tscn" id="2_q8k1b"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/wind_feather.tscn" id="20_feath"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hhitk"]
 size = Vector2(1210, 20)
@@ -32,3 +33,6 @@ shape = SubResource("RectangleShape2D_hhitk")
 
 [node name="Label" parent="UserInterface" parent_id_path=PackedInt32Array(1799764374) index="1" unique_id=1103718868]
 text = "Level 2"
+
+[node name="WindFeather" parent="Coins" parent_id_path=PackedInt32Array(1530662565) instance=ExtResource("20_feath")]
+position = Vector2(450, 330)

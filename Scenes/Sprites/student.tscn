@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bvoon20abmdym"]
 
-[ext_resource type="Texture2D" uid="uid://b1vbi75pc8vhg" path="res://Assets/Spritesheet/student_thai.png" id="1_jda5o"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/hero_nanta.png" id="1_jda5o"]
 [ext_resource type="Texture2D" uid="uid://b7f4d7rpedxw3" path="res://Assets/Spritesheet/WandT2.png" id="2_w1wrk"]
 
 [sub_resource type="Animation" id="Animation_xb0ar"]
